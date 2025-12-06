@@ -11,10 +11,7 @@ namespace BackEnd_S5_L5.Services
         // Get 
         public async Task<Verbale> GetVerbaleAsync(Guid id)
         {
-            return await _applicationDbContext.Verbali
-                .Include(v => v.Anagrafica)
-                .Include(v => v.TipoViolazione)
-                .FirstOrDefaultAsync(v => v.IdVerbale == id);
+            return await _applicationDbContext.Verbali.Include(v => v.Anagrafica).Include(v => v.TipoViolazione).FirstOrDefaultAsync(v => v.IdVerbale == id);
         }
 
         // Get all

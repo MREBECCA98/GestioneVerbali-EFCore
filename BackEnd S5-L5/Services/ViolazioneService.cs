@@ -13,9 +13,7 @@ namespace BackEnd_S5_L5.Services
         // Get 
         public async Task<TipoViolazione> GetViolazioneAsync(Guid id)
         {
-            return await _applicationDbContext.TipoViolazioni
-                .Include(v => v.Verbali)
-                .FirstOrDefaultAsync(v => v.IdViolazione == id);
+            return await _applicationDbContext.TipoViolazioni.Include(v => v.Verbali).FirstOrDefaultAsync(v => v.IdViolazione == id);
         }
 
         // Get all

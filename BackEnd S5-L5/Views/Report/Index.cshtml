@@ -1,6 +1,10 @@
-﻿<h2>Report</h2>
+﻿@{
+    ViewData["Title"] = "Report";
+}
 
-<h4>Totale Verbali per Trasgressore</h4>
+<h2>Report</h2>
+
+<h4 class="mt-3">Totale verbali per trasgressore</h4>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -9,17 +13,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.TotaleVerbali)
+        @foreach (var totV in ViewBag.TotaleVerbali)
         {
             <tr>
-                <td>@item.Trasgressore</td>
-                <td>@item.TotaleVerbali</td>
+                <td>@totV.Trasgressore</td>
+                <td>@totV.TotaleVerbali</td>
             </tr>
         }
     </tbody>
 </table>
 
-<h4>Totale Punti Decurtati per Trasgressore</h4>
+<h4 class="mt-3">Totale punti decurtati per trasgressore</h4>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -28,17 +32,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.TotalePunti)
+        @foreach (var totP in ViewBag.TotalePunti)
         {
             <tr>
-                <td>@item.Trasgressore</td>
-                <td>@item.TotalePunti</td>
+                <td>@totP.Trasgressore</td>
+                <td>@totP.TotalePunti</td>
             </tr>
         }
     </tbody>
 </table>
 
-<h4>Violazioni con Punti > 10</h4>
+<h4 class="mt-3">Violazioni con punti > 10</h4>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -50,20 +54,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.PuntiMaggiore10)
+        @foreach (var punti in ViewBag.PuntiMaggiore10)
         {
             <tr>
-                <td>@item.Importo</td>
-                <td>@item.Cognome</td>
-                <td>@item.Nome</td>
-                <td>@item.DataViolazione.ToShortDateString()</td>
-                <td>@item.DecurtamentoPunti</td>
+                <td>@punti.Importo</td>
+                <td>@punti.Cognome</td>
+                <td>@punti.Nome</td>
+                <td>@punti.DataViolazione.ToShortDateString()</td>
+                <td>@punti.DecurtamentoPunti</td>
             </tr>
         }
     </tbody>
 </table>
 
-<h4>Violazioni con Importo > 400</h4>
+<h4 class="mt-3">Violazioni con importo > 400</h4>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -75,14 +79,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.ImportoMaggiore400)
+        @foreach (var importo in ViewBag.ImportoMaggiore400)
         {
             <tr>
-                <td>@item.Importo</td>
-                <td>@item.Cognome</td>
-                <td>@item.Nome</td>
-                <td>@item.DataViolazione.ToShortDateString()</td>
-                <td>@item.DecurtamentoPunti</td>
+                <td>@importo.Importo</td>
+                <td>@importo.Cognome</td>
+                <td>@importo.Nome</td>
+                <td>@importo.DataViolazione.ToShortDateString()</td>
+                <td>@importo.DecurtamentoPunti</td>
             </tr>
         }
     </tbody>

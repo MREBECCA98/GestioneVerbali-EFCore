@@ -15,9 +15,7 @@ namespace BackEnd_S5_L5.Services
         // Get 
         public async Task<Anagrafica> GetTrasgressoreAsync(Guid id)
         {
-            return await _applicationDbContext.Anagrafiche
-          .Include(a => a.Verbali)
-          .FirstOrDefaultAsync(a => a.IdAnagrafica == id);
+            return await _applicationDbContext.Anagrafiche.Include(a => a.Verbali).FirstOrDefaultAsync(a => a.IdAnagrafica == id);
         }
 
         // Get all
