@@ -16,13 +16,16 @@ namespace BackEnd_S5_L5.Services
         public async Task<Anagrafica> GetTrasgressoreAsync(Guid id)
         {
             return await _applicationDbContext.Anagrafiche
-                .FirstOrDefaultAsync(a => a.IdAnagrafica == id);
+          .Include(a => a.Verbali)
+          .FirstOrDefaultAsync(a => a.IdAnagrafica == id);
         }
 
         // Get all
         public async Task<List<Anagrafica>> GetAllTrasgressoriAsync()
         {
-            return await _applicationDbContext.Anagrafiche.ToListAsync();
+            return await _applicationDbContext.Anagrafiche
+          .Include(a => a.Verbali)
+          .ToListAsync();
         }
 
         // Create

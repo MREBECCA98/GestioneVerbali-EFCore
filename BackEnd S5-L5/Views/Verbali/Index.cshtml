@@ -3,68 +3,75 @@
 <h2>Verbali</h2>
 
 <h4>Aggiungi Verbale</h4>
-<form asp-action="Index" method="post">
-    <div class="row mb-2">
-        <div class="col">
-            <input type="date" name="DataViolazione" class="form-control" required />
-        </div>
-        <div class="col">
-            <input type="text" name="IndirizzoViolazione" class="form-control" placeholder="Indirizzo Violazione" required />
-        </div>
+
+<form asp-controller="Verbali" asp-action="Index" method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Data Violazione</label>
+        <input type="date" class="form-control" name="DataViolazione" />
     </div>
 
-    <div class="row mb-2">
-        <div class="col">
-            <input type="text" name="NominativoAgente" class="form-control" placeholder="Agente" required />
-        </div>
-        <div class="col">
-            <input type="number" name="Importo" class="form-control" placeholder="Importo" required step="0.01" />
-        </div>
-        <div class="col">
-            <input type="number" name="DecurtamentoPunti" class="form-control" placeholder="Decurtamento punti" required />
-        </div>
+    <div class="mb-3">
+        <label class="form-label">Indirizzo Violazione</label>
+        <input type="text" class="form-control" name="IndirizzoViolazione" />
     </div>
 
-    <div class="row mb-2">
-        <div class="col">
-            <select name="IdAnagraficaFk" class="form-control" required>
-                <option value="">Seleziona Trasgressore</option>
-                @* Popola con trasgressori dal DB *@
-                @* Nel controller passerai ViewBag.Trasgressori *@
-                @foreach (var t in ViewBag.Trasgressori as List<BackEnd_S5_L5.Models.Entities.Anagrafica>)
-                {
-                    <option value="@t.IdAnagrafica">@t.Cognome @t.Nome</option>
-                }
-            </select>
-        </div>
-        <div class="col">
-            <select name="IdViolazioneFk" class="form-control" required>
-                <option value="">Seleziona Violazione</option>
-                @foreach (var v in ViewBag.Violazioni as List<BackEnd_S5_L5.Models.Entities.TipoViolazione>)
-                {
-                    <option value="@v.IdViolazione">@v.Descrizione</option>
-                }
-            </select>
-        </div>
+    <div class="mb-3">
+        <label class="form-label">Nominativo Agente</label>
+        <input type="text" class="form-control" name="NominativoAgente" />
     </div>
 
-    <button type="submit" class="btn btn-success">Aggiungi Verbale</button>
+    <div class="mb-3">
+        <label class="form-label">Importo</label>
+        <input type="number" class="form-control" name="Importo" step="0.01" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Decurtamento Punti</label>
+        <input type="number" class="form-control" name="DecurtamentoPunti" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Trasgressore</label>
+        <select class="form-control" name="IdAnagraficaFk">
+            <option value="">Seleziona trasgressore</option>
+            @foreach (var t in ViewBag.Trasgressori as List<BackEnd_S5_L5.Models.Entities.Anagrafica>)
+            {
+                <option value="@t.IdAnagrafica">@t.Cognome @t.Nome</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tipo Violazione</label>
+        <select class="form-control" name="IdViolazioneFk">
+            <option value="">Seleziona violazione</option>
+            @foreach (var v in ViewBag.Violazioni as List<BackEnd_S5_L5.Models.Entities.TipoViolazione>)
+            {
+                <option value="@v.IdViolazione">@v.Descrizione</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="bg-dark text-white fw-bold px-4 py-2">Aggiungi</button>
 </form>
 
-<hr />
 
 <table class="table table-striped mt-3">
     <thead>
         <tr>
-            <th>Data Violazione</th>
+            <th>Data</th>
             <th>Indirizzo</th>
             <th>Agente</th>
             <th>Importo</th>
             <th>Punti</th>
             <th>Trasgressore</th>
             <th>Violazione</th>
+            <th>Modifica</th>
+            <th>Elimina</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var v in Model)
         {
@@ -72,10 +79,34 @@
                 <td>@v.DataViolazione.ToShortDateString()</td>
                 <td>@v.IndirizzoViolazione</td>
                 <td>@v.NominativoAgente</td>
-                <td>@v.Importo</td>
+                <td>@v.Importo €</td>
                 <td>@v.DecurtamentoPunti</td>
                 <td>@v.Anagrafica.Cognome @v.Anagrafica.Nome</td>
                 <td>@v.TipoViolazione.Descrizione</td>
+                <td>
+                    <a class="text-black" asp-controller="Verbali" asp-action="Update" asp-route-id="@v.IdVerbale">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                        </svg>
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Verbali" asp-action="Delete" asp-route-id="@v.IdVerbale" method="post" style="display:inline">
+                        <button class="text-black" type="submit" onclick="return confirm('Sei sicuro di voler eliminare il verbale?');"
+                                style="border:none; background:none; padding:0;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+
+
+
+
+
+
             </tr>
         }
     </tbody>

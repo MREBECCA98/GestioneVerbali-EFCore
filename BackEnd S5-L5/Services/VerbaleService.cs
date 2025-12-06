@@ -6,18 +6,18 @@ namespace BackEnd_S5_L5.Services
 {
     public class VerbaleService : ServiceBase
     {
+        public VerbaleService(ApplicationDbContext applicationDbContext) : base(applicationDbContext) { }
 
-        public VerbaleService(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        // Get 
+        public async Task<Verbale> GetVerbaleAsync(Guid id)
         {
+            return await _applicationDbContext.Verbali
+                .Include(v => v.Anagrafica)
+                .Include(v => v.TipoViolazione)
+                .FirstOrDefaultAsync(v => v.IdVerbale == id);
         }
 
-        //get idVerbale
-        public async Task<Verbale> GetVerbaleAsync(Guid Id)
-        {
-            return _applicationDbContext.Verbali.FirstOrDefault(v => v.IdVerbale == Id);
-        }
-
-        //get all
+        // Get all
         public async Task<List<Verbale>> GetAllVerbaliAsync()
         {
             return await _applicationDbContext.Verbali
@@ -26,38 +26,32 @@ namespace BackEnd_S5_L5.Services
                 .ToListAsync();
         }
 
-        //create 
+        // Create
         public async Task<bool> Create(Verbale verbale)
         {
             try
             {
                 await _applicationDbContext.Verbali.AddAsync(verbale);
-                await _applicationDbContext.SaveChangesAsync();
-                return true;
+                return await _applicationDbContext.SaveChangesAsync() > 0;
             }
-            catch (Exception ex)
+            catch
             {
-
                 return false;
             }
         }
 
+        // Update
         public async Task<bool> Update(Verbale verbale)
         {
-
-            this._applicationDbContext.Verbali.Update(verbale);
-            return this._applicationDbContext.SaveChanges() > 0;
-
+            _applicationDbContext.Verbali.Update(verbale);
+            return await _applicationDbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Deleted(Verbale verbale)
+        // Delete
+        public async Task<bool> Delete(Verbale verbale)
         {
-
-            this._applicationDbContext.Verbali.Remove(verbale);
-            return this._applicationDbContext.SaveChanges() > 0;
-
+            _applicationDbContext.Verbali.Remove(verbale);
+            return await _applicationDbContext.SaveChangesAsync() > 0;
         }
-
-
     }
 }

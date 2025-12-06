@@ -1,0 +1,62 @@
+﻿@model BackEnd_S5_L5.Models.Entities.Verbale
+
+<h2>Modifica Verbale</h2>
+
+<form asp-action="Update" method="post">
+
+    <input type="hidden" name="IdVerbale" value="@Model.IdVerbale" />
+
+    <div class="mb-3">
+        <label class="form-label">Data Violazione</label>
+        <input type="date" class="form-control" name="DataViolazione" value="@Model.DataViolazione.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Indirizzo Violazione</label>
+        <input type="text" class="form-control" name="IndirizzoViolazione" value="@Model.IndirizzoViolazione" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nominativo Agente</label>
+        <input type="text" class="form-control" name="NominativoAgente" value="@Model.NominativoAgente" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Importo</label>
+        <input type="number" class="form-control" name="Importo" step="0.01" value="@Model.Importo" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Decurtamento Punti</label>
+        <input type="number" class="form-control" name="DecurtamentoPunti" value="@Model.DecurtamentoPunti" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Trasgressore</label>
+        <select class="form-control" name="IdAnagraficaFk" required>
+            <option value="">Seleziona trasgressore</option>
+            @foreach (var t in ViewBag.Trasgressori as List<BackEnd_S5_L5.Models.Entities.Anagrafica>)
+            {
+                <option value="@t.IdAnagrafica">
+                    @t.Cognome @t.Nome
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tipo Violazione</label>
+        <select class="form-control" name="IdViolazioneFk" required>
+            <option value="">Seleziona violazione</option>
+            @foreach (var v in ViewBag.Violazioni as List<BackEnd_S5_L5.Models.Entities.TipoViolazione>)
+            {
+                <option value="@v.IdViolazione">
+                    @v.Descrizione
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="bg-dark text-white fw-bold px-4 py-2">Modifica</button>
+
+</form>

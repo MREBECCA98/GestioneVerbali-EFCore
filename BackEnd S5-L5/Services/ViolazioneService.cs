@@ -1,6 +1,7 @@
 ﻿using BackEnd_S5_L5.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace BackEnd_S5_L5.Services
 {
     public class ViolazioniService : ServiceBase
@@ -9,30 +10,29 @@ namespace BackEnd_S5_L5.Services
         {
         }
 
-        // Get violazione per Id
+        // Get 
         public async Task<TipoViolazione> GetViolazioneAsync(Guid id)
         {
-            return await _applicationDbContext.Violazioni
+            return await _applicationDbContext.TipoViolazioni
                 .Include(v => v.Verbali)
                 .FirstOrDefaultAsync(v => v.IdViolazione == id);
         }
 
-        // Get tutte le violazioni
+        // Get all
         public async Task<List<TipoViolazione>> GetAllViolazioniAsync()
         {
-            return await _applicationDbContext.Violazioni
-                .Include(v => v.Verbali)
+            return await _applicationDbContext.TipoViolazioni.Include(v => v.Verbali)
                 .ToListAsync();
         }
+
 
         // Create
         public async Task<bool> Create(TipoViolazione violazione)
         {
             try
             {
-                await _applicationDbContext.Violazioni.AddAsync(violazione);
-                await _applicationDbContext.SaveChangesAsync();
-                return true;
+                await _applicationDbContext.TipoViolazioni.AddAsync(violazione);
+                return await _applicationDbContext.SaveChangesAsync() > 0;
             }
             catch
             {
@@ -43,15 +43,15 @@ namespace BackEnd_S5_L5.Services
         // Update
         public async Task<bool> Update(TipoViolazione violazione)
         {
-            _applicationDbContext.Violazioni.Update(violazione);
-            return _applicationDbContext.SaveChanges() > 0;
+            _applicationDbContext.TipoViolazioni.Update(violazione);
+            return await _applicationDbContext.SaveChangesAsync() > 0;
         }
 
         // Delete
         public async Task<bool> Delete(TipoViolazione violazione)
         {
-            _applicationDbContext.Violazioni.Remove(violazione);
-            return _applicationDbContext.SaveChanges() > 0;
+            _applicationDbContext.TipoViolazioni.Remove(violazione);
+            return await _applicationDbContext.SaveChangesAsync() > 0;
         }
     }
 }

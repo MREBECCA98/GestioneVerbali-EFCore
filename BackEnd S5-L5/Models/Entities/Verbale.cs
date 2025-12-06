@@ -39,10 +39,10 @@ namespace BackEnd_S5_L5.Models.Entities
 
         [ForeignKey(nameof(IdViolazioneFk))]
         [DeleteBehavior(DeleteBehavior.Cascade)]
-        public TipoViolazione TipoViolazione { get; set; }
+        public TipoViolazione? TipoViolazione { get; set; }
 
         [ForeignKey(nameof(IdAnagraficaFk))]
         [DeleteBehavior(DeleteBehavior.Cascade)]
-        public Anagrafica Anagrafica { get; set; }
+        public Anagrafica? Anagrafica { get; set; }
     }
 }
