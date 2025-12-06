@@ -1,0 +1,89 @@
+﻿<h2>Report</h2>
+
+<h4>Totale Verbali per Trasgressore</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Trasgressore</th>
+            <th>Totale Verbali</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.TotaleVerbali)
+        {
+            <tr>
+                <td>@item.Trasgressore</td>
+                <td>@item.TotaleVerbali</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Totale Punti Decurtati per Trasgressore</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Trasgressore</th>
+            <th>Totale Punti</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.TotalePunti)
+        {
+            <tr>
+                <td>@item.Trasgressore</td>
+                <td>@item.TotalePunti</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Violazioni con Punti > 10</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Importo</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Data Violazione</th>
+            <th>Punti</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.PuntiMaggiore10)
+        {
+            <tr>
+                <td>@item.Importo</td>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.DataViolazione.ToShortDateString()</td>
+                <td>@item.DecurtamentoPunti</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Violazioni con Importo > 400</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Importo</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Data Violazione</th>
+            <th>Punti</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.ImportoMaggiore400)
+        {
+            <tr>
+                <td>@item.Importo</td>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.DataViolazione.ToShortDateString()</td>
+                <td>@item.DecurtamentoPunti</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -26,10 +26,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(
     );
 
 
-
 builder.Services.AddScoped<VerbaleService>();
-builder.Services.AddScoped<TipoViolazioneService>();
-builder.Services.AddScoped<AnagraficaService>();
+builder.Services.AddScoped<TrasgressoriService>();
+builder.Services.AddScoped<ViolazioniService>();
 
 var app = builder.Build();
 

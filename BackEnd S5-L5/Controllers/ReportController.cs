@@ -2,7 +2,7 @@
 
 namespace BackEnd_S5_L5.Controllers
 {
-    public class InfoController : Controller
+    public class ReportController : Controller
     {
         public IActionResult Index()
         {

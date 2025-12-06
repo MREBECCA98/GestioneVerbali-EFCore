@@ -1,0 +1,82 @@
+﻿@model List<BackEnd_S5_L5.Models.Entities.Verbale>
+
+<h2>Verbali</h2>
+
+<h4>Aggiungi Verbale</h4>
+<form asp-action="Index" method="post">
+    <div class="row mb-2">
+        <div class="col">
+            <input type="date" name="DataViolazione" class="form-control" required />
+        </div>
+        <div class="col">
+            <input type="text" name="IndirizzoViolazione" class="form-control" placeholder="Indirizzo Violazione" required />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col">
+            <input type="text" name="NominativoAgente" class="form-control" placeholder="Agente" required />
+        </div>
+        <div class="col">
+            <input type="number" name="Importo" class="form-control" placeholder="Importo" required step="0.01" />
+        </div>
+        <div class="col">
+            <input type="number" name="DecurtamentoPunti" class="form-control" placeholder="Decurtamento punti" required />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col">
+            <select name="IdAnagraficaFk" class="form-control" required>
+                <option value="">Seleziona Trasgressore</option>
+                @* Popola con trasgressori dal DB *@
+                @* Nel controller passerai ViewBag.Trasgressori *@
+                @foreach (var t in ViewBag.Trasgressori as List<BackEnd_S5_L5.Models.Entities.Anagrafica>)
+                {
+                    <option value="@t.IdAnagrafica">@t.Cognome @t.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <select name="IdViolazioneFk" class="form-control" required>
+                <option value="">Seleziona Violazione</option>
+                @foreach (var v in ViewBag.Violazioni as List<BackEnd_S5_L5.Models.Entities.TipoViolazione>)
+                {
+                    <option value="@v.IdViolazione">@v.Descrizione</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Aggiungi Verbale</button>
+</form>
+
+<hr />
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Data Violazione</th>
+            <th>Indirizzo</th>
+            <th>Agente</th>
+            <th>Importo</th>
+            <th>Punti</th>
+            <th>Trasgressore</th>
+            <th>Violazione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.DataViolazione.ToShortDateString()</td>
+                <td>@v.IndirizzoViolazione</td>
+                <td>@v.NominativoAgente</td>
+                <td>@v.Importo</td>
+                <td>@v.DecurtamentoPunti</td>
+                <td>@v.Anagrafica.Cognome @v.Anagrafica.Nome</td>
+                <td>@v.TipoViolazione.Descrizione</td>
+            </tr>
+        }
+    </tbody>
+</table>

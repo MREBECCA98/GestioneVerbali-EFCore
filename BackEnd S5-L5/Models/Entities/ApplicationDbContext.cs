@@ -11,8 +11,9 @@ namespace BackEnd_S5_L5.Models.Entities
         }
 
         public DbSet<Anagrafica> Anagrafiche { get; set; }
-        public DbSet<TipoViolazione> TipiViolazione { get; set; }
+
         public DbSet<Verbale> Verbali { get; set; }
+        public DbSet<TipoViolazione> Violazioni { get; set; }
 
 
     }

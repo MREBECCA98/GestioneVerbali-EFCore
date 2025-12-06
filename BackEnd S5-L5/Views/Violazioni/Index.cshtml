@@ -1,0 +1,29 @@
+﻿@model List<BackEnd_S5_L5.Models.Entities.TipoViolazione>
+
+<h2>Violazioni</h2>
+
+<h4>Aggiungi Violazione</h4>
+<form asp-action="Index" method="post">
+    <div class="mb-2">
+        <input type="text" name="Descrizione" class="form-control" placeholder="Descrizione della violazione" required />
+    </div>
+    <button type="submit" class="btn btn-success">Aggiungi</button>
+</form>
+
+<hr />
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var v in Model)
+        {
+            <tr>
+                <td>@v.Descrizione</td>
+            </tr>
+        }
+    </tbody>
+</table>

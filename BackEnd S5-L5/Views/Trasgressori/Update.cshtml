@@ -1,0 +1,39 @@
+﻿@model BackEnd_S5_L5.Models.Entities.Anagrafica
+@{
+}
+<form asp-action="Update" method="post">
+    <input type="hidden" name="IdAnagrafica" value="@Model.IdAnagrafica" />
+    <div class="mb-3">
+        <label class="form-label ">Cognome</label>
+        <input type="text" class="form-control" name="Cognome" value="@Model.Cognome">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" name="Nome" value="@Model.Nome">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label ">Indirizzo</label>
+        <input type="text" class="form-control" name="Indirizzo" value="@Model.Indirizzo">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label ">Città</label>
+        <input type="text" class="form-control" name="Citta" value="@Model.Citta">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label ">CAP</label>
+        <input type="text" class="form-control" name="Cap" value="@Model.Cap">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label ">Codice fiscale</label>
+        <input type="text" class="form-control" name="CodiceFiscale" value="@Model.CodiceFiscale">
+    </div>
+
+
+    <button type="submit" class="bg-dark text-white fw-bold px-4 py-2">Modifica</button>
+
+</form>
